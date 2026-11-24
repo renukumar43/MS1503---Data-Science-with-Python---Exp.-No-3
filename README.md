@@ -37,23 +37,119 @@ To create a sample retail dataset, identify and handle missing values (`NaN`/`No
 
 ## Program
 
-#Cleaning and Preparing Retail Data using Pandas
 
-#Step 1: Create a sample retail dataset
+# Cleaning and Preparing Retail Data using Pandas
 
-#Step 2: Check for missing values
+import pandas as pd
 
-#Step 3: Fill missing numeric values with column mean
+# Step 1: Create a sample retail dataset
+data = {
+    "Order_ID": ["O001", "O002", "O003", "O004",
+                 "O005", "O006", "O007", "O001"],
 
-#Step 4: Fill missing Region with mode (most frequent value)
+  "Product": ["Laptop", "Phone", "Tablet", "Laptop",
+                "Phone", "Tablet", "Laptop", "Laptop"],
 
-#Step 5: Remove duplicate records
+  "Region": ["North", "South", None, "West",
+               "South", "East", "North", "North"],
 
-#Step 6: Display summary statistics
+  "Sales": [50000, 30000, 25000, None,
+              35000, 20000, 50000, 50000],
+
+  "Discount": [5000, 3000, None, 4000,
+               3500, 2000, 5000, 5000],
+
+  "Profit": [8000, 5000, 4000, 6000,
+               None, 3000, 8000, 8000]
+}
+
+# Step 2: Convert dictionary into DataFrame
+df = pd.DataFrame(data)
+
+print("Original Retail Dataset:")
+print(df)
+
+print("\nOriginal Dataset Shape:", df.shape)
+
+# Step 3: Check for missing values
+print("\nMissing Values Before Cleaning:")
+print(df.isnull().sum())
+
+# Step 4: Fill missing numerical values with column mean
+numeric_columns = ["Sales", "Discount", "Profit"]
+
+for col in numeric_columns:
+    df[col] = df[col].fillna(df[col].mean())
+
+# Step 5: Fill missing Region with mode
+df["Region"] = df["Region"].fillna(df["Region"].mode()[0])
+
+print("\nDataset After Filling Missing Values:")
+print(df)
+
+# Step 6: Remove duplicate records
+print("\nDuplicate Records Before Removal:",
+      df.duplicated().sum())  
+
+df_clean = df.drop_duplicates()  
+
+# Step 7: Display cleaned dataset
+print("\nCleaned Retail Dataset:")  
+print(df_clean)  
+
+print("\nShape After Cleaning:", df_clean.shape)  
+
+# Step 8: Display summary statistics
+print("\nSummary Statistics:")  
+print(df_clean.describe())  
+
+# Step 9: Check missing values after cleaning
+print("\nMissing Values After Cleaning:")  
+print(df_clean.isnull().sum())  
+
+print("\nDuplicate Records After Cleaning:",
+      df_clean.duplicated().sum()) 
+
 
 
 
 ## Output
+
+
+Original Retail Dataset Shape: (8, 6)
+
+Missing Values Before Cleaning:
+
+Order_ID    0
+Product     0
+Region      1
+Sales       1
+Discount    1
+Profit      1
+
+Duplicate Records Before Removal: 1
+
+Shape After Cleaning: (7, 6)
+
+Missing Values After Cleaning:
+
+Order_ID    0
+Product     0
+Region      0
+Sales       0
+Discount    0
+Profit      0
+
+Duplicate Records After Cleaning: 0 
+
+Summary Statistics:
+
+  Sales    Discount    Profit
+count         7.00        7.00      7.00
+mean      35306.12     3775.51   5714.29
+std       11575.38     1072.56   1889.82
+min       20000.00     2000.00   3000.00
+max       50000.00     5000.00   8000.00
 
 
 ## Result
