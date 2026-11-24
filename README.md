@@ -144,12 +144,12 @@ Duplicate Records After Cleaning: 0
 
 Summary Statistics:
 
-Sales    Discount    Profit  
-count         7.00        7.00      7.00  
-mean      35306.12     3775.51   5714.29  
-std       11575.38     1072.56   1889.82  
-min       20000.00     2000.00   3000.00  
-max       50000.00     5000.00   8000.00  
+Sales      Discount    Profit  
+count           7.00        7.00        7.00  
+mean        35306.12       3775.51     5714.29  
+std         11575.38       1072.56     1889.82  
+min         20000.00       2000.00     3000.00  
+max         50000.00       5000.00     8000.00  
 
 
 ## Result
